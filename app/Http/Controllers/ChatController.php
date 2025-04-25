@@ -25,21 +25,36 @@ class ChatController extends Controller
     {
         $request->validate(
             [
-                'chat_message' => 'required|max:150'
+                'chat_message' => 'nullable|max:150',
+                'chat_image' => 'nullable|image|max:2048',
             ],
             [
-                'chat_message' . '.required' => 'You cannot submit an empty message.',
-                'chat_message' . '.max' => 'The message must not have more than 150 characters.'
+                'chat_message.required' => 'You cannot submit an empty message.',
+                'chat_message.max' => 'The message must not have more than 150 characters.',
+                'chat_image.image' => 'Only image files are allowed.',
+                'chat_image.max' => 'The image must be less than 2MB.',
             ]
         );
-    
-        $this->chat->sender_id = Auth::user()->id;
-        $this->chat->receiver_id = $id;
-        $this->chat->message    = $request->input('chat_message');
-        $this->chat->save();
-    
+
+        // If both message and image are empty, reject it
+        if (!$request->filled('chat_message') && !$request->hasFile('chat_image')) {
+            return back()->withErrors(['chat_message' => 'Please enter a message or select an image.']);
+        }
+
+        $chat = new Chat();
+        $chat->sender_id = Auth::id();
+        $chat->receiver_id = $id;
+        $chat->message = $request->input('chat_message');
+
+        if ($request->hasFile('chat_image')) {
+            $chat->image = $request->file('chat_image')->store('chat_images', 'public');
+        }
+
+        $chat->save();
+
         return redirect()->back();
     }
+
 
    //show
     public function show($id)
@@ -50,8 +65,12 @@ class ChatController extends Controller
         $this->chat
             ->where('sender_id', $id)
             ->where('receiver_id', Auth::id())
-            ->where('status', 1)
-            ->update(['status' => 0]);
+            // ->where('status', 1)
+            ->whereNull('read_at')
+            ->update([
+                'status' => 0,
+                'read_at' => now()]
+            );
     
         // 📥 Load chat between authenticated user and the other user
         $chats = $this->chat

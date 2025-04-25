@@ -115,19 +115,19 @@
     }
 
     .friend-request .accept {
-        background-color: #28a745;
+        background-color: #2861a7;
     }
 
     .friend-request .accept:hover {
-        background-color: #218838;
+        background-color: #2861a7;
     }
 
     .friend-request .reject {
-        background-color: #dc3545;
+        background-color: black;
     }
 
     .friend-request .reject:hover {
-        background-color: #c82333;
+        background-color: black;
     }
 
     @media (max-width: 768px) {

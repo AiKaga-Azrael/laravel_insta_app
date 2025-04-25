@@ -8,6 +8,8 @@ class Chat extends Model
 {
     public $timestamps = false;
     protected $table = 'chat'; 
+    protected $fillable = ['message', 'image', 'status']; // optional: for mass assignment
+    protected $dates = ['read_at']; 
 
     public function sender()
     {

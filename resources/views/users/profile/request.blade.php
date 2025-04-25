@@ -12,8 +12,12 @@
             <div class="friend-request"> 
 
                 {{-- user name + avatar --}}
-                <a href="{{ route('profile.show', $user->id) }}">
-                    <img src="{{ $user->avatar }}" alt="{{ $user->name }}" class="rounded-circle avatar-sm"> 
+                <a href="{{ route('profile.show', $user->id) }}" class="d-flex align-items-center gap-2">
+                    @if ($user->avatar)
+                        <img src="{{ $user->avatar }}" class="rounded-circle avatar-sm">
+                    @else
+                        <i class="fa-solid fa-user" style="font-size: 1.8rem;"></i>
+                    @endif
                     {{ $user->name }}
                 </a>
 
