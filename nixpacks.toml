@@ -1,5 +1,10 @@
 [phases.setup]
-nixpkgs = ["php83", "php83Packages.composer", "php83Extensions.pdo", "php83Extensions.pdo_mysql"]
+nixpkgs = [
+  "php83",
+  "php83Packages.composer",
+  "php83Extensions.pdo",
+  "php83Extensions.pdo_mysql"
+]
 
 [phases.build]
 cmds = [
@@ -8,5 +13,3 @@ cmds = [
 
 [start]
 cmd = "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT}"
-
-php83Extensions.pdo_mysql
