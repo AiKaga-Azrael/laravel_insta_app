@@ -1,0 +1,10 @@
+[phases.setup]
+nixpkgs = ["php83", "php83Packages.composer", "php83Extensions.pdo_sqlite"]
+
+[phases.build]
+cmds = [
+  "composer install --no-dev --optimize-autoloader"
+]
+
+[start]
+cmd = "npm run start"
