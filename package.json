@@ -3,8 +3,7 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite",
-        "start": "node server.js"
+        "dev": "vite"
 
     },
     "devDependencies": {
