@@ -1,5 +1,7 @@
 # Laravel Instagram Clone 📸
 
+![App Preview](insta_preview.png)
+
 A simple Instagram-like app built with Laravel.  
 Users can register, log in, post content (including videos), like posts, and chat with each other.
 
