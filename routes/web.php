@@ -14,6 +14,13 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\ChatController;
 
+Route::get('/migrate-sessions', function () {
+    Artisan::call('session:table');
+    Artisan::call('migrate', ['--force' => true]);
+    return '✅ sessions table created!';
+});
+
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -98,9 +105,6 @@ Route::get('/migrate', function () {
     return 'Migration done!';
     });
 
-    Route::get('/migrate-sessions', function () {
-        \Illuminate\Support\Facades\Artisan::call('session:table');
-        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
-        return '✅ sessions table created!';
-    });
+
+    
     
