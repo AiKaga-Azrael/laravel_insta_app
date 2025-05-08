@@ -27,6 +27,7 @@
 
 
 
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}"> <!-- asset will look for public folder and then css -->
 </head>
