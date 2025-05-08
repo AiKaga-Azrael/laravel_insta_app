@@ -3,13 +3,16 @@ nixpkgs = [
   "php83",
   "php83Packages.composer",
   "php83Extensions.pdo",
-  "php83Extensions.pdo_mysql"
+  "php83Extensions.pdo_mysql",
+  "nodejs_20" # or nodejs_18 if your project uses that
 ]
 
 [phases.build]
 cmds = [
-  "composer install --no-dev --optimize-autoloader"
+  "composer install --no-dev --optimize-autoloader",
+  "npm ci",
+  "npm run build"
 ]
 
 [start]
-cmd = "php -S 0.0.0.0:${PORT} -t public"
+cmd = "php artisan serve --host=0.0.0.0 --port=${PORT}"
