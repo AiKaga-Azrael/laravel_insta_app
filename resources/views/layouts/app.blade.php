@@ -29,7 +29,8 @@
 
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}"> <!-- asset will look for public folder and then css -->
+    <link rel="stylesheet" href="{{ secure_asset('css/style.css') }}">
+
 </head>
 <body>
     <div id="app">
