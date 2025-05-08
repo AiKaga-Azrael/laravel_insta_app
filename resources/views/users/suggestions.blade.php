@@ -3,7 +3,7 @@
 @section('title', 'Suggested Users')
 
 @section('content')
-    @include('users.profile.header')
+@php use Illuminate\Support\Str; @endphp
     <div class="w-50 mx-auto card bg-white shadow border-0 p-4">
         <div class="row align-items-center mb-3 px-4 py-2">
             <div class="row">

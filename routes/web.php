@@ -89,11 +89,11 @@ Route::group(['middleware' => 'auth'], function(){
 
     });
 
-   
 
-    Route::get('/migrate', function () {
-        Artisan::call('migrate', ['--force' => true]);
-        return 'Migration done!';
-    });
 
 });
+
+Route::get('/migrate', function () {
+    Artisan::call('migrate', ['--force' => true]);
+    return 'Migration done!';
+    });

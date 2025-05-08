@@ -51,12 +51,10 @@ class HomeController extends Controller
             return $home_posts;
     }
 
-    # getSuggestedUsers()- Get the users that the Auth user is not following
-    # if (!$user->isFollowed()){ is if the user is not following
     private function getSuggestedUsers()
     {
-        $all_users = $this->user->all()->except(Auth::user()->id);
-        $suggested_users = []; 
+        $all_users = $this->user->withCount('followers')->get()->except(Auth::id());
+        $suggested_users = [];
 
         foreach ($all_users as $user){
             if (!$user->isFollowed()){
@@ -65,15 +63,11 @@ class HomeController extends Controller
         }
 
         return array_slice($suggested_users, 0, 5);
-        // array_slice(x,y,z)
-        // x -- array
-        // y -- offset/starting index
-        // z -- length/how many
     }
 
     public function showSuggestedUsers()
     {
-        $all_users = $this->user->all()->except(Auth::user()->id);
+        $all_users = $this->user->withCount('followers')->get()->except(Auth::id());
         $suggested_users = [];
 
         foreach($all_users as $user){
@@ -83,8 +77,44 @@ class HomeController extends Controller
         }
 
         return view('users.suggestions')
-                ->with('suggested_users', $suggested_users);
+            ->with('suggested_users', $suggested_users);
     }
+
+
+    // # getSuggestedUsers()- Get the users that the Auth user is not following
+    // # if (!$user->isFollowed()){ is if the user is not following
+    // private function getSuggestedUsers()
+    // {
+    //     $all_users = $this->user->all()->except(Auth::user()->id);
+    //     $suggested_users = []; 
+
+    //     foreach ($all_users as $user){
+    //         if (!$user->isFollowed()){
+    //             $suggested_users[] = $user;
+    //         }
+    //     }
+
+    //     return array_slice($suggested_users, 0, 5);
+    //     // array_slice(x,y,z)
+    //     // x -- array
+    //     // y -- offset/starting index
+    //     // z -- length/how many
+    // }
+
+    // public function showSuggestedUsers()
+    // {
+    //     $all_users = $this->user->all()->except(Auth::user()->id);
+    //     $suggested_users = [];
+
+    //     foreach($all_users as $user){
+    //         if (!$user->isFollowed()){
+    //             $suggested_users[] = $user;
+    //         }
+    //     }
+
+    //     return view('users.suggestions')
+    //             ->with('suggested_users', $suggested_users);
+    // }
 
     public function search(Request $request)
     {
