@@ -97,3 +97,10 @@ Route::get('/migrate', function () {
     Artisan::call('migrate', ['--force' => true]);
     return 'Migration done!';
     });
+
+    Route::get('/migrate-sessions', function () {
+        \Illuminate\Support\Facades\Artisan::call('session:table');
+        \Illuminate\Support\Facades\Artisan::call('migrate', ['--force' => true]);
+        return '✅ sessions table created!';
+    });
+    
