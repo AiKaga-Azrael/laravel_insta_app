@@ -14,20 +14,6 @@ use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\ChatController;
 
-Route::get('/migrate-sessions', function () {
-    // Make sure the session migration exists
-    if (!file_exists(database_path('migrations/2014_10_12_000000_create_sessions_table.php'))) {
-        Artisan::call('session:table');
-    }
-
-    // Run all migrations, including sessions
-    Artisan::call('migrate', ['--force' => true]);
-
-    return '✅ sessions table created!';
-});
-
-
-
 // Route::get('/', function () {
 //     return view('welcome');
 // });
