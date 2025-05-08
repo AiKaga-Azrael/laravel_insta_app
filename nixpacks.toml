@@ -4,7 +4,7 @@ nixpkgs = [
   "php83Packages.composer",
   "php83Extensions.pdo",
   "php83Extensions.pdo_mysql",
-  "nodejs_20" # or nodejs_18 if your project uses that
+  "nodejs_20"
 ]
 
 [phases.build]
